@@ -5,7 +5,7 @@ import Heart from "../roots/svgs/icons/heart";
 export default function LocationCard({ data }) {
   const { name, type } = data;
   return (
-    <Card className="flex flex-col items-center justify-center text-center gap-2 p-4">
+    <Card className="flex flex-col items-center justify-center text-center gap-2 p-4 bg-0-darkGray-0 cursor-pointer">
       <h4>{name}</h4>
       <h4>{type}</h4>
       <InfoBtn />

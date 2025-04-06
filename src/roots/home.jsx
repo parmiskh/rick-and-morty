@@ -69,7 +69,7 @@ export default function Root() {
           <SearchBar />
           <Filter />
         </div>
-        <span className="flex justify-between items-center px-28  mt-16 pb-8">
+        <span className="flex  items-center px-28  mt-16 pb-8">
           <h3 className="font-bold text-2xl font-inter text-white">
             Personagens
           </h3>
@@ -88,7 +88,7 @@ export default function Root() {
             );
           })}
         </ul>
-        <span className="flex justify-between items-center px-28  mt-16 pb-8">
+        <span className="flex items-center px-28  mt-16 pb-8">
           <h3 className="font-bold text-2xl font-inter text-white">
             Episódios
           </h3>
@@ -106,7 +106,7 @@ export default function Root() {
           })}
         </ul>
 
-        <span className="flex justify-between items-center px-28  mt-16 pb-8">
+        <span className="flex items-center px-28  mt-16 pb-8">
           <h3 className="font-bold text-2xl font-inter text-white">
             Localizações
           </h3>
@@ -116,7 +116,10 @@ export default function Root() {
         <ul className="flex justify-center gap-4 pb-8">
           {location.slice(0, 7).map((loc) => {
             return (
-              <li className="max-w-50 gap-3 text-white " key={loc.id}>
+              <li
+                className="max-w-50 gap-3 text-white *:border-none"
+                key={loc.id}
+              >
                 <LocationCard data={loc}></LocationCard>
               </li>
             );
