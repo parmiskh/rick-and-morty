@@ -95,7 +95,7 @@ export default function Root() {
 
           <Moreinfo />
         </span>
-        
+
         <ul className=" flex justify-center gap-4 pb-8">
           {episode.slice(0, 5).map((ep) => {
             return (
@@ -108,7 +108,7 @@ export default function Root() {
 
         <span className="flex justify-between items-center px-28  mt-16 pb-8">
           <h3 className="font-bold text-2xl font-inter text-white">
-          Localizações
+            Localizações
           </h3>
 
           <Moreinfo />
@@ -122,7 +122,72 @@ export default function Root() {
             );
           })}
         </ul>
-        
+        <div className="flex justify-between px-8">
+          <RickLogo />
+          <span className="flex items-center text-white">
+            <p>Voltar ao topo</p>
+            <svg
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M20 35C28.2843 35 35 28.2843 35 20C35 11.7157 28.2843 5 20 5C11.7157 5 5 11.7157 5 20C5 28.2843 11.7157 35 20 35Z"
+                stroke="#E4F4F4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M14.7031 19.0469L20 13.75L25.2969 19.0469"
+                stroke="white"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M20 26.25V13.75"
+                stroke="white"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+        </div>
+        <hr className="w-full h-3 my-8 text-white" />
+        <div className="flex justify-between p-8 text-white">
+          <p>©2023</p>
+          <span className="flex gap-2">
+            <i>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 18L22 12L16 6"
+                  stroke="#11B0C8"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M8 6L2 12L8 18"
+                  stroke="#11B0C8"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </i>
+            <p>
+              Desenvolvido por{" "}
+              <strong className="text-0-primary-0">Henrique Sousa</strong>
+            </p>
+          </span>
+        </div>
       </div>
     </>
   );
