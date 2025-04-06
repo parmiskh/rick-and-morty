@@ -22,13 +22,13 @@ export default function CharacterCard({ data }) {
         </div>
       )}
     >
-      <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white ">
-        {name}
-      </h5>
+      <div className="flex justify-between">
+        <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white ">
+          {name}
+        </h5>
+        <Heart color={"cyan"} w={"48px"} h={"48px"} />
+      </div>
       <div>
-        <button>
-          <Heart color={"#11B0C8"} w={"42px"} h={"36px"} />
-        </button>
         <div className="text-white">
           <div className="flex gap-1 items-center my-1">
             <i>
@@ -49,7 +49,9 @@ export default function CharacterCard({ data }) {
             <p>{origin}</p>
           </div>
         </div>
-        <InfoBtn/>
+        <div className="flex justify-end">
+          <InfoBtn />
+        </div>
       </div>
     </Card>
   );

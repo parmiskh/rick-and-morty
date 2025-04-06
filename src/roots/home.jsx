@@ -186,7 +186,7 @@ export default function Root() {
               </svg>
             </i>
             <p>
-              Desenvolvido por{" "}
+              Desenvolvido por
               <strong className="text-0-primary-0">Henrique Sousa</strong>
             </p>
           </span>
