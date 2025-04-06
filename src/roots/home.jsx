@@ -69,8 +69,8 @@ export default function Root() {
           <SearchBar />
           <Filter />
         </div>
-        <span className="inline-flex items-end">
-          <h3 className="font-bold text-2xl font-inter text-white px-28 ">
+        <span className="flex justify-between items-center px-28  mt-16 pb-8">
+          <h3 className="font-bold text-2xl font-inter text-white">
             Personagens
           </h3>
 
@@ -88,15 +88,16 @@ export default function Root() {
             );
           })}
         </ul>
-        <span className="inline-flex items-end">
-          <h3 className="font-bold text-2xl font-inter text-white px-28 ">
+        <span className="flex justify-between items-center px-28  mt-16 pb-8">
+          <h3 className="font-bold text-2xl font-inter text-white">
             Episódios
           </h3>
 
           <Moreinfo />
         </span>
-        <ul className="flex">
-          {episode.slice(0, 8).map((ep) => {
+        
+        <ul className=" flex justify-center gap-4 pb-8">
+          {episode.slice(0, 5).map((ep) => {
             return (
               <li className="max-w-80 cursor-pointer *:border-none" key={ep.id}>
                 <EpisodeCard data={ep} />
@@ -105,7 +106,14 @@ export default function Root() {
           })}
         </ul>
 
-        <ul className="flex">
+        <span className="flex justify-between items-center px-28  mt-16 pb-8">
+          <h3 className="font-bold text-2xl font-inter text-white">
+          Localizações
+          </h3>
+
+          <Moreinfo />
+        </span>
+        <ul className="flex justify-center gap-4 pb-8">
           {location.slice(0, 7).map((loc) => {
             return (
               <li className="max-w-50 gap-3 text-white " key={loc.id}>
@@ -114,6 +122,7 @@ export default function Root() {
             );
           })}
         </ul>
+        
       </div>
     </>
   );
