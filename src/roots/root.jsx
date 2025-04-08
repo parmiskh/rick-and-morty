@@ -4,5 +4,11 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    children: [
+      {
+        path: "Character/:id",
+        element: <p>salam</p>,
+      },
+    ],
   },
 ]);

@@ -13,6 +13,7 @@ import EpisodeCard from "../components/EpisodeCard";
 import getEpisode from "../api/episodeApi";
 import LocationCard from "../components/LocationCard";
 import { getLocation } from "../api/locationApi";
+import useListCards from "../components/uselistCards";
 
 export default function Root() {
   const [character, setCharacter] = useState([]);
@@ -77,16 +78,7 @@ export default function Root() {
           <Moreinfo />
         </span>
         <ul className="flex gap-4 justify-around flex-wrap px-28 py-8 ">
-          {character.slice(0, 8).map((char) => {
-            return (
-              <li
-                className="max-w-80 cursor-pointer *:border-none"
-                key={char.id}
-              >
-                {<CharacterCard data={char} />}
-              </li>
-            );
-          })}
+          {useListCards(character, 8, CharacterCard)}
         </ul>
         <span className="flex items-center px-28  mt-16 pb-8">
           <h3 className="font-bold text-2xl font-inter text-white">
@@ -97,13 +89,7 @@ export default function Root() {
         </span>
 
         <ul className=" flex justify-center gap-4 pb-8">
-          {episode.slice(0, 5).map((ep) => {
-            return (
-              <li className="max-w-80 cursor-pointer *:border-none" key={ep.id}>
-                <EpisodeCard data={ep} />
-              </li>
-            );
-          })}
+          {useListCards(episode, 5, EpisodeCard)}
         </ul>
 
         <span className="flex items-center px-28  mt-16 pb-8">
@@ -114,16 +100,7 @@ export default function Root() {
           <Moreinfo />
         </span>
         <ul className="flex justify-center gap-4 pb-8">
-          {location.slice(0, 7).map((loc) => {
-            return (
-              <li
-                className="max-w-50 gap-3 text-white *:border-none"
-                key={loc.id}
-              >
-                <LocationCard data={loc}></LocationCard>
-              </li>
-            );
-          })}
+          {useListCards(location, 7, LocationCard)}
         </ul>
         <div className="flex justify-between px-8">
           <RickLogo />
