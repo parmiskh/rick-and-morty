@@ -73,7 +73,7 @@ export default function Character() {
               <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12">
                 <Planet />
               </div>
-              <div className="w-24 py-1">
+              <div className="max-w-36 w-full py-1">
                 <h4>planet</h4>
                 <h4 className="text-0-primary-0">{char.origin.name}</h4>
               </div>
@@ -88,7 +88,7 @@ export default function Character() {
               <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12">
                 <Location />
               </div>
-              <div className="w-24 py-1">
+              <div className="max-w-36 w-full text-base py-4">
                 <h4>{char.location.name}</h4>
               </div>
               <InfoBtn />
