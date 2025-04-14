@@ -4,8 +4,8 @@ export default function SearchBar() {
       <input
         type="text"
         placeholder="Personagem, episódio, localização..."
-        className="p-4 bg-transparent outline-none w-full text-white"
-      />
+        className="p-4 bg-transparent outline-none w-full text-white"  
+    />
       <button>
         <svg
           width="32"
