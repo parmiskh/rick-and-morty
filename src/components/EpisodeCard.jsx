@@ -6,9 +6,9 @@ import InfoBtn from "./Moreinfo";
 export default function EpisodeCard({ data }) {
   const { name, episode } = data;
   return (
-    <Card className="p-4 bg-0-darkGray-0">
-      <div className="flex justify-between items-start gap-2">
-        <div className="flex flex-col items-start gap-2">
+    <Card className="bg-0-darkGray-0 max-h-24">
+      <div className="flex justify-between items-start p-0 ">
+        <div className="flex flex-col items-start ">
           <div className="flex items-center gap-2">
             <Play />
             <h5 className="font-bold tracking-tight text-gray-900 dark:text-white">

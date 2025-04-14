@@ -15,16 +15,37 @@ import LocationCard from "../components/LocationCard";
 import { getLocation } from "../api/locationApi";
 import useListCards from "../components/uselistCards";
 import Up from "./svgs/icons/up";
+import UseHandleSubmit from "../components/useHandelSubmit";
 
 export default function Root() {
   const [character, setCharacter] = useState([]);
   const [episode, setEpisode] = useState([]);
   const [location, setLocation] = useState([]);
+  const [filteredChar, setFilterItemChar] = useState([]);
+  const [filteredEp, setFilterItemEp] = useState([]);
+  const [filteredLoc, setFilterItemLoc] = useState([]);
+
   useEffect(() => {
-    getCharacters().then((char) => setCharacter(char));
-    getEpisode().then((ep) => setEpisode(ep));
-    getLocation().then((loc) => setLocation(loc));
+    getCharacters().then((char) => {
+      setCharacter(char);
+      setFilterItemChar(char);
+    });
+    getEpisode().then((ep) => {
+      setEpisode(ep);
+      setFilterItemEp(ep);
+    });
+    getLocation().then((loc) => {
+      setLocation(loc);
+      setFilterItemLoc(loc);
+    });
   }, []);
+
+  function handelSubmit(e, search) {
+    e.preventDefault();
+    UseHandleSubmit(search, filteredChar, setCharacter);
+    UseHandleSubmit(search, filteredEp, setEpisode);
+    UseHandleSubmit(search, filteredLoc, setLocation);
+  }
   return (
     <>
       <div className="bg-black dark">
@@ -67,7 +88,7 @@ export default function Root() {
       </div>
       <div className="bg-0-darkest-0">
         <div className="flex justify-between py-16 px-28">
-          <SearchBar />
+          <SearchBar handelSubmit={handelSubmit} />
           <Filter />
         </div>
         <span className="flex  items-center px-28  mt-16 pb-8">
@@ -87,11 +108,9 @@ export default function Root() {
 
           <Moreinfo />
         </span>
-
         <ul className=" flex justify-center gap-4 pb-8">
           {useListCards(episode, 5, EpisodeCard)}
         </ul>
-
         <span className="flex items-center px-28  mt-16 pb-8">
           <h3 className="font-bold text-2xl font-inter text-white">
             Localizações
