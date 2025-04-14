@@ -18,3 +18,11 @@ export async function getCharacters(page) {
   );
   return res.data.results.map(formatCharacter);
 }
+export async function getCharactersById(id) {
+  if (!id) return;
+
+  const res = await axios.get(
+    `https://rickandmortyapi.com/api/character/${id}`
+  );
+  return res.data;
+}
