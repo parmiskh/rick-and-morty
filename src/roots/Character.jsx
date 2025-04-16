@@ -6,7 +6,7 @@ import Alive from "./svgs/icons/alive";
 import InfoBtn from "../components/Moreinfo";
 import Planet from "./svgs/icons/planet";
 import { getCharacters, getCharactersById } from "../api/charApi";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
 import Location from "../components/location";
 import Alien from "./svgs/icons/alien";
 import Gender from "./svgs/icons/gender";
@@ -22,9 +22,11 @@ export async function Loader({ params }) {
 export default function Character() {
   const { char } = useLoaderData();
   const [character, setCharacter] = useState([]);
+
   useEffect(() => {
     getCharacters().then((char) => setCharacter(char));
-  });
+  }, []);
+
   return (
     <div className="bg-0-dark1-0 px-44 py-8">
       <div className="flex justify-between py-5 px-26">
@@ -132,7 +134,7 @@ export default function Character() {
         </h4>
       </div>
       <ul className="flex gap-4 justify-around flex-wrap  py-8 ">
-        {useListCards(character, 12, CharacterCard)}
+        {useListCards(character, 12 + 1, CharacterCard)}
       </ul>
     </div>
   );

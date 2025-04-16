@@ -6,7 +6,7 @@ import Planet from "../roots/svgs/icons/planet";
 import InfoBtn from "./Moreinfo";
 
 export default function CharacterCard({ data }) {
-  const { name, image, status, species, origin } = data;
+  const { id, name, image, status, species, origin } = data;
   return (
     <Card
       className="max-w-72 bg-0-darkGray-0 rounded-none"
