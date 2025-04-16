@@ -5,8 +5,8 @@ import Play from "./svgs/icons/play";
 import Alive from "./svgs/icons/alive";
 import InfoBtn from "../components/Moreinfo";
 import Planet from "./svgs/icons/planet";
-import { getCharacters, getCharactersById } from "../api/charApi";
-import { useLoaderData, useParams } from "react-router-dom";
+import { getCharacters, getCharactersById, getTotalChar } from "../api/charApi";
+import { useLoaderData } from "react-router-dom";
 import Location from "../components/location";
 import Alien from "./svgs/icons/alien";
 import Gender from "./svgs/icons/gender";
@@ -18,15 +18,30 @@ export async function Loader({ params }) {
   const char = await getCharactersById(params.id);
   return { char };
 }
-
+const perPage = 12;
 export default function Character() {
   const { char } = useLoaderData();
   const [character, setCharacter] = useState([]);
-
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState([]);
+  const start = (page - 1) * perPage;
+  const end = start + perPage;
   useEffect(() => {
-    getCharacters().then((char) => setCharacter(char));
-  }, []);
-
+    getCharacters(page).then((char) => {
+      setCharacter(char);
+    });
+    if (page === 1) getTotalChar().then((all) => setTotal(all));
+  }, [page]);
+  const nextPage = () => {
+    if (page + 1 <= Math.ceil(total / perPage)) {
+      setPage(() => page + 1);
+    }
+  };
+  const prevPage = () => {
+    if (page - 1 > 0) {
+      setPage(() => page - 1);
+    }
+  };
   return (
     <div className="bg-0-dark1-0 px-44 py-8">
       <div className="flex justify-between py-5 px-26">
@@ -134,8 +149,12 @@ export default function Character() {
         </h4>
       </div>
       <ul className="flex gap-4 justify-around flex-wrap  py-8 ">
-        {useListCards(character, 12 + 1, CharacterCard)}
+        {useListCards(character, end + 1, CharacterCard)}
       </ul>
+      <div className="flex gap-4">
+        <button onClick={prevPage}>-</button>
+        <button onClick={nextPage}>+</button>
+      </div>
     </div>
   );
 }

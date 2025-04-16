@@ -26,3 +26,9 @@ export async function getCharactersById(id) {
   );
   return res.data;
 }
+export async function getTotalChar(page) {
+  const res = await axios.get(
+    `https://rickandmortyapi.com/api/character/?page=${page}`
+  );
+  return res.data.info.count;
+}
