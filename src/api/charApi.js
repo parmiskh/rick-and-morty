@@ -16,6 +16,7 @@ export async function getCharacters(page) {
   const res = await axios.get(
     `https://rickandmortyapi.com/api/character/?page=${page}`
   );
+  console.log(res.data);
   return res.data.results.map(formatCharacter);
 }
 export async function getCharactersById(id) {

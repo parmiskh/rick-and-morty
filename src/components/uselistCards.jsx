@@ -6,9 +6,14 @@ export default function useListCards(state, cut, Card) {
     .filter((value) => value.id != currId.id)
     .map((value) => {
       return (
-        <li className="max-w-50 gap-3 text-white *:border-none" key={value.id}>
-          <Link to={`/Character/${value.id}`}>{<Card data={value} />}</Link>
-        </li>
+        <Link to={`/Character/${value.id}`}>
+          <li
+            className="max-w-50 gap-3 text-white *:border-none"
+            key={value.id}
+          >
+            {<Card data={value} />}
+          </li>
+        </Link>
       );
     });
 }

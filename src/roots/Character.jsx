@@ -13,6 +13,7 @@ import Gender from "./svgs/icons/gender";
 import { useEffect, useState } from "react";
 import useListCards from "../components/uselistCards";
 import CharacterCard from "../components/CharCards";
+import Footer from "../components/footer";
 
 export async function Loader({ params }) {
   const char = await getCharactersById(params.id);
@@ -149,12 +150,17 @@ export default function Character() {
         </h4>
       </div>
       <ul className="flex gap-4 justify-around flex-wrap  py-8 ">
-        {useListCards(character, end + 1, CharacterCard)}
+        {useListCards(character, end, CharacterCard)}
       </ul>
-      <div className="flex gap-4">
-        <button onClick={prevPage}>-</button>
-        <button onClick={nextPage}>+</button>
+      <div className="flex gap-4 justify-center">
+        <Button onClick={prevPage} className="p-6 min-w-28">
+          perveuse
+        </Button>
+        <Button onClick={nextPage} className="p-6 min-w-28">
+          next
+        </Button>
       </div>
+      <Footer />
     </div>
   );
 }

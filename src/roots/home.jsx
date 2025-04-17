@@ -14,8 +14,8 @@ import getEpisode from "../api/episodeApi";
 import LocationCard from "../components/LocationCard";
 import { getLocation } from "../api/locationApi";
 import useListCards from "../components/uselistCards";
-import Up from "./svgs/icons/up";
 import UseHandleSubmit from "../components/useHandelSubmit";
+import Footer from "../components/footer";
 
 export default function Root() {
   const [character, setCharacter] = useState([]);
@@ -121,48 +121,7 @@ export default function Root() {
         <ul className="flex justify-center gap-4 pb-8">
           {useListCards(location, 7, LocationCard)}
         </ul>
-        <div className="flex justify-between px-8">
-          <RickLogo />
-          <span className="flex items-center text-white">
-            <p>Voltar ao topo</p>
-
-            <Up />
-          </span>
-        </div>
-        <hr className="w-full h-3 my-8 text-white" />
-        <div className="flex justify-between p-8 text-white">
-          <p>©2023</p>
-          <span className="flex gap-2">
-            <i>
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M16 18L22 12L16 6"
-                  stroke="#11B0C8"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M8 6L2 12L8 18"
-                  stroke="#11B0C8"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </i>
-            <p>
-              Desenvolvido por
-              <strong className="text-0-primary-0">Henrique Sousa</strong>
-            </p>
-          </span>
-        </div>
+        <Footer />
       </div>
     </>
   );
