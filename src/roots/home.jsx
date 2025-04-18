@@ -13,9 +13,9 @@ import EpisodeCard from "../components/EpisodeCard";
 import getEpisode from "../api/episodeApi";
 import LocationCard from "../components/LocationCard";
 import { getLocation } from "../api/locationApi";
-import useListCards from "../components/uselistCards";
 import UseHandleSubmit from "../components/useHandelSubmit";
 import Footer from "../components/footer";
+import { Link } from "react-router-dom";
 
 export default function Root() {
   const [character, setCharacter] = useState([]);
@@ -99,7 +99,18 @@ export default function Root() {
           <Moreinfo />
         </span>
         <ul className="flex gap-4 justify-around flex-wrap px-28 py-8 ">
-          {useListCards(character, 8, CharacterCard)}
+          {character.slice(0, 8).map((value) => {
+            return (
+              <li
+                className="max-w-50 gap-3 text-white *:border-none"
+                key={value.id}
+              >
+                <Link to={`/Character/${value.id}`}>
+                  {<CharacterCard data={value} />}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
         <span className="flex items-center px-28  mt-16 pb-8">
           <h3 className="font-bold text-2xl font-inter text-white">
@@ -109,7 +120,16 @@ export default function Root() {
           <Moreinfo />
         </span>
         <ul className=" flex justify-center gap-4 pb-8">
-          {useListCards(episode, 5, EpisodeCard)}
+          {episode.slice(0, 5).map((value) => {
+            return (
+              <li
+                className="max-w-50 gap-3 text-white *:border-none"
+                key={value.id}
+              >
+                <Link to={`//${value.id}`}>{<EpisodeCard data={value} />}</Link>
+              </li>
+            );
+          })}
         </ul>
         <span className="flex items-center px-28  mt-16 pb-8">
           <h3 className="font-bold text-2xl font-inter text-white">
@@ -118,9 +138,16 @@ export default function Root() {
 
           <Moreinfo />
         </span>
-        <ul className="flex justify-center gap-4 pb-8">
-          {useListCards(location, 7, LocationCard)}
-        </ul>
+        {location.slice(0, 7).map((value) => {
+          return (
+            <li
+              className="max-w-50 gap-3 text-white *:border-none"
+              key={value.id}
+            >
+              <Link to={`//${value.id}`}>{<LocationCard data={value} />}</Link>
+            </li>
+          );
+        })}
         <Footer />
       </div>
     </>
