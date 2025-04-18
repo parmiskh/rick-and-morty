@@ -11,9 +11,9 @@ import Location from "../components/location";
 import Alien from "./svgs/icons/alien";
 import Gender from "./svgs/icons/gender";
 import { useEffect, useState } from "react";
-import useListCards from "../components/uselistCards";
 import CharacterCard from "../components/CharCards";
 import Footer from "../components/footer";
+import { Link, useParams } from "react-router-dom";
 
 export async function Loader({ params }) {
   const char = await getCharactersById(params.id);
@@ -21,12 +21,13 @@ export async function Loader({ params }) {
 }
 const perPage = 12;
 export default function Character() {
+  const currid = useParams();
   const { char } = useLoaderData();
   const [character, setCharacter] = useState([]);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState([]);
-  const start = (page - 1) * perPage;
-  const end = start + perPage;
+  // const start = (page - 1) * perPage;
+  // const end = start + perPage;
   useEffect(() => {
     getCharacters(page).then((char) => {
       setCharacter(char);
@@ -150,7 +151,21 @@ export default function Character() {
         </h4>
       </div>
       <ul className="flex gap-4 justify-around flex-wrap  py-8 ">
-        {useListCards(character, end, CharacterCard)}
+        {character
+          .slice(0, 8)
+          .filter((value) => value.id != currid.id)
+          .map((value) => {
+            return (
+              <li
+                className="max-w-50 gap-3 text-white *:border-none"
+                key={value.id}
+              >
+                <Link to={`/Character/${value.id}`}>
+                  {<CharacterCard data={value} />}
+                </Link>
+              </li>
+            );
+          })}
       </ul>
       <div className="flex gap-4 justify-center">
         <Button onClick={prevPage} className="p-6 min-w-28">
