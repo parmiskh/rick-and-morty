@@ -1,7 +1,7 @@
 import { Card } from "flowbite-react";
 import Heart from "../roots/svgs/icons/heart";
 import Play from "../roots/svgs/icons/play";
-import InfoBtn from "./Moreinfo";
+import InfoBtn from "./moreinfo";
 
 export default function EpisodeCard({ data }) {
   const { name, episode } = data;

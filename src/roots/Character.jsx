@@ -3,7 +3,7 @@ import { Button } from "flowbite-react";
 import Heart from "./svgs/icons/heart";
 import Play from "./svgs/icons/play";
 import Alive from "./svgs/icons/alive";
-import InfoBtn from "../components/Moreinfo";
+import InfoBtn from "../components/moreinfo";
 import Planet from "./svgs/icons/planet";
 import { getCharacters, getCharactersById, getTotalChar } from "../api/charApi";
 import { useLoaderData } from "react-router-dom";
@@ -11,7 +11,7 @@ import Location from "../components/location";
 import Alien from "./svgs/icons/alien";
 import Gender from "./svgs/icons/gender";
 import { useEffect, useState } from "react";
-import CharacterCard from "../components/CharCards";
+import CharacterCard from "../components/charCards";
 import Footer from "../components/footer";
 import { Link, useParams } from "react-router-dom";
 
@@ -19,31 +19,38 @@ export async function Loader({ params }) {
   const char = await getCharactersById(params.id);
   return { char };
 }
+const apiPageSize = 20;
 const perPage = 12;
 export default function Character() {
   const currid = useParams();
   const { char } = useLoaderData();
   const [character, setCharacter] = useState([]);
-  const [page, setPage] = useState(1);
-  const [total, setTotal] = useState([]);
-  // const start = (page - 1) * perPage;
-  // const end = start + perPage;
-  useEffect(() => {
-    getCharacters(page).then((char) => {
-      setCharacter(char);
-    });
-    if (page === 1) getTotalChar().then((all) => setTotal(all));
-  }, [page]);
+  const [apiPage, setApiPage] = useState(1);
+  const [localPage, setlocalPage] = useState(1);
+  const [total, setTotal] = useState(0);
+  const start = (localPage - 1) * perPage;
+  const end = start + perPage;
   const nextPage = () => {
-    if (page + 1 <= Math.ceil(total / perPage)) {
-      setPage(() => page + 1);
+    if (localPage + 1 <= Math.ceil(character.length / perPage)) {
+      setlocalPage((perv) => perv + 1);
+    } else if (apiPage < Math.ceil(total / apiPageSize)) {
+      setApiPage((perv) => perv + 1);
     }
   };
   const prevPage = () => {
-    if (page - 1 > 0) {
-      setPage(() => page - 1);
+    if (localPage - 1 > 0) {
+      setlocalPage((perv) => perv - 1);
+    } else if (apiPage > 1) {
+      setApiPage((prev) => prev - 1);
     }
   };
+  useEffect(() => {
+    getCharacters(apiPage).then((ep) => {
+      setCharacter(ep);
+      setlocalPage(1);
+    });
+    getTotalChar().then((all) => setTotal(all));
+  }, [apiPage]);
   return (
     <div className="bg-0-dark1-0 px-44 py-8">
       <div className="flex justify-between py-5 px-26">
@@ -152,18 +159,18 @@ export default function Character() {
       </div>
       <ul className="flex gap-4 justify-around flex-wrap  py-8 ">
         {character
-          .slice(0, 8)
+          .slice(start, end)
           .filter((value) => value.id != currid.id)
           .map((value) => {
             return (
-              <li
-                className="max-w-50 gap-3 text-white *:border-none"
-                key={value.id}
-              >
-                <Link to={`/Character/${value.id}`}>
+              <Link to={`/Character/${value.id}`}>
+                <li
+                  className="max-w-50 gap-3 text-white *:border-none"
+                  key={value.id}
+                >
                   {<CharacterCard data={value} />}
-                </Link>
-              </li>
+                </li>
+              </Link>
             );
           })}
       </ul>

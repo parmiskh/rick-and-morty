@@ -6,12 +6,12 @@ import Heart from "./svgs/icons/heart";
 import SearchBar from "../components/searchBar";
 import Filter from "../components/filter";
 import Moreinfo from "../components/more";
-import CharacterCard from "../components/CharCards";
+import CharacterCard from "../components/charCards";
 import { getCharacters } from "../api/charApi";
 import { useState, useEffect } from "react";
-import EpisodeCard from "../components/EpisodeCard";
+import EpisodeCard from "../components/episodeCard";
 import getEpisode from "../api/episodeApi";
-import LocationCard from "../components/LocationCard";
+import LocationCard from "../components/locationCard";
 import { getLocation } from "../api/locationApi";
 import UseHandleSubmit from "../components/useHandelSubmit";
 import Footer from "../components/footer";
@@ -101,14 +101,14 @@ export default function Root() {
         <ul className="flex gap-4 justify-around flex-wrap px-28 py-8 ">
           {character.slice(0, 8).map((value) => {
             return (
-              <li
-                className="max-w-50 gap-3 text-white *:border-none"
-                key={value.id}
-              >
-                <Link to={`/Character/${value.id}`}>
+              <Link to={`/Character/${value.id}`}>
+                <li
+                  className="max-w-50 gap-3 text-white *:border-none"
+                  key={value.id}
+                >
                   {<CharacterCard data={value} />}
-                </Link>
-              </li>
+                </li>
+              </Link>
             );
           })}
         </ul>
@@ -122,12 +122,14 @@ export default function Root() {
         <ul className=" flex justify-center gap-4 pb-8">
           {episode.slice(0, 5).map((value) => {
             return (
-              <li
-                className="max-w-50 gap-3 text-white *:border-none"
-                key={value.id}
-              >
-                <Link to={`//${value.id}`}>{<EpisodeCard data={value} />}</Link>
-              </li>
+              <Link to={`/Episode/${value.id}`}>
+                <li
+                  className="max-w-50 gap-3 text-white *:border-none"
+                  key={value.id}
+                >
+                  {<EpisodeCard data={value} />}
+                </li>
+              </Link>
             );
           })}
         </ul>
@@ -138,16 +140,20 @@ export default function Root() {
 
           <Moreinfo />
         </span>
-        {location.slice(0, 7).map((value) => {
-          return (
-            <li
-              className="max-w-50 gap-3 text-white *:border-none"
-              key={value.id}
-            >
-              <Link to={`//${value.id}`}>{<LocationCard data={value} />}</Link>
-            </li>
-          );
-        })}
+        <ul className="flex justify-center gap-4">
+          {location.slice(0, 7).map((value) => {
+            return (
+              <Link to={`//${value.id}`}>
+                <li
+                  className="max-w-50 gap-3 text-white *:border-none"
+                  key={value.id}
+                >
+                  {<LocationCard data={value} />}
+                </li>
+              </Link>
+            );
+          })}
+        </ul>
         <Footer />
       </div>
     </>

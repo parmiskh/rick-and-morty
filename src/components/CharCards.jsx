@@ -3,7 +3,7 @@ import Heart from "../roots/svgs/icons/heart";
 import Alive from "../roots/svgs/icons/alive";
 import Alien from "../roots/svgs/icons/alien";
 import Planet from "../roots/svgs/icons/planet";
-import InfoBtn from "./Moreinfo";
+import InfoBtn from "./moreinfo";
 
 export default function CharacterCard({ data }) {
   const { id, name, image, status, species, origin } = data;
