@@ -1,5 +1,5 @@
 import { Card } from "flowbite-react";
-import InfoBtn from "./Moreinfo";
+import InfoBtn from "./moreinfo";
 import Heart from "../roots/svgs/icons/heart";
 
 export default function LocationCard({ data }) {
