@@ -25,6 +25,7 @@ export default function Episode() {
   const [apiPage, setApiPage] = useState(1);
   const [localPage, setlocalPage] = useState(1);
   const [total, setTotal] = useState(0);
+  const [goToLastLocalPage, setGotoLastLocalPage] = useState(false);
   const start = (localPage - 1) * perPage;
   const end = start + perPage;
   const nextPage = () => {
@@ -39,12 +40,18 @@ export default function Episode() {
       setlocalPage((perv) => perv - 1);
     } else if (apiPage > 1) {
       setApiPage((prev) => prev - 1);
+      setGotoLastLocalPage(true);
     }
   };
   useEffect(() => {
     getEpisode(apiPage).then((ep) => {
       setEpisode(ep);
-      setlocalPage(1);
+      if (goToLastLocalPage) {
+        setlocalPage(Math.ceil(ep.length / perPage));
+        setGotoLastLocalPage(false);
+      } else {
+        setlocalPage(1);
+      }
     });
     getTotalEp().then((all) => setTotal(all));
   }, [apiPage]);
@@ -150,14 +157,17 @@ export default function Episode() {
       </ul>
       <div className="flex gap-4 justify-center">
         <Button
-          disabled={localPage - 1 < 0}
+          disabled={apiPage === 1 && localPage === 1}
           onClick={prevPage}
           className="p-6 min-w-28"
         >
           perveuse
         </Button>
         <Button
-          //   disabled={localPage + 1 >= Math.ceil(episode.length / perPage)}
+          disabled={
+            localPage === Math.ceil(episode.length / perPage) &&
+            apiPage === Math.ceil(total / apiPageSize)
+          }
           onClick={nextPage}
           className="p-6 min-w-28"
         >
