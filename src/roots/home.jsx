@@ -47,20 +47,26 @@ export default function Root() {
     UseHandleSubmit(search, filteredLoc, setLocation);
   }
   return (
+
     <>
       <div className="bg-black dark">
-        <div className="flex justify-between py-5 px-28">
+        <div className="flex flex-col md:flex-row justify-between py-5 px-6 md:px-20 lg:px-28 gap-4 md:gap-0">
           <RickLogo />
-          <Button color="cyan" pill size="xs" className="gap-2">
+          <Button
+            color="cyan"
+            pill
+            size="xs"
+            className="gap-2 w-fit self-end md:self-center"
+          >
             <i>
               <Heart color={"white"} w={"24px"} h={"24px"} />
             </i>
             Lista de favoritos
           </Button>
         </div>
-        <div className="flex p-8 justify-between">
-          <div className="w-96 h-32 flex flex-col gap-10">
-            <h1 className="font-Inter text-5xl font-bold">
+        <div className="flex flex-col-reverse lg:flex-row p-6 md:p-12 lg:p-20 justify-between items-center gap-10">
+          <div className="w-full lg:w-1/2 flex flex-col gap-6">
+            <h1 className="font-Inter text-3xl md:text-4xl lg:text-5xl font-bold leading-snug">
               Saiba tudo em um só
               <strong className="text-0-primary-0"> lugar.</strong>
             </h1>
@@ -83,79 +89,71 @@ export default function Root() {
             </div>
             <h4 className="text-0-Primary2-0">Ai sim, Porr#@%&*</h4>
           </div>
-          <DarkRick />
+          <div className="w-full lg:w-1/2 flex justify-center">
+            <DarkRick />
+          </div>
         </div>
       </div>
-      <div className="bg-0-darkest-0">
-        <div className="flex justify-between py-16 px-28">
-          <SearchBar handelSubmit={handelSubmit} />
-          <Filter />
-        </div>
-        <span className="flex  items-center px-28  mt-16 pb-8">
-          <h3 className="font-bold text-2xl font-inter text-white">
-            Personagens
-          </h3>
+      
+  <div className="bg-0-darkest-0">
+    <div className="flex flex-col md:flex-row justify-between py-8 md:py-16 px-6 md:px-20 lg:px-28 gap-6">
+      <SearchBar handelSubmit={handelSubmit} />
+      <Filter />
+    </div>
 
-          <Moreinfo />
-        </span>
-        <ul className="flex gap-4 justify-around flex-wrap px-28 py-8 ">
-          {character.slice(0, 8).map((value) => {
-            return (
-              <Link to={`/Character/${value.id}`}>
-                <li
-                  className="max-w-50 gap-3 text-white *:border-none"
-                  key={value.id}
-                >
-                  {<CharacterCard data={value} />}
-                </li>
-              </Link>
-            );
-          })}
-        </ul>
-        <span className="flex items-center px-28  mt-16 pb-8">
-          <h3 className="font-bold text-2xl font-inter text-white">
-            Episódios
-          </h3>
-
-          <Moreinfo />
-        </span>
-        <ul className=" flex justify-center gap-4 pb-8">
-          {episode.slice(0, 5).map((value) => {
-            return (
-              <Link to={`/Episode/${value.id}`}>
-                <li
-                  className="max-w-50 gap-3 text-white *:border-none"
-                  key={value.id}
-                >
-                  {<EpisodeCard data={value} />}
-                </li>
-              </Link>
-            );
-          })}
-        </ul>
-        <span className="flex items-center px-28  mt-16 pb-8">
-          <h3 className="font-bold text-2xl font-inter text-white">
-            Localizações
-          </h3>
-
-          <Moreinfo />
-        </span>
-        <ul className="flex justify-center gap-4">
-          {location.slice(0, 7).map((value) => {
-            return (
-              <Link to={`//${value.id}`}>
-                <li
-                  className="max-w-50 gap-3 text-white *:border-none"
-                  key={value.id}
-                >
-                  {<LocationCard data={value} />}
-                </li>
-              </Link>
-            );
-          })}
-        </ul>
-        <Footer />
+    {/* Characters */}
+    <section className="px-6 md:px-20 lg:px-28 mt-10">
+      <div className="flex items-center justify-between pb-4">
+        <h3 className="font-bold text-2xl font-inter text-white">Personagens</h3>
+        <Moreinfo />
       </div>
+      <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+        {character.slice(0, 8).map((value) => (
+          <Link to={`/Character/${value.id}`} key={value.id}>
+            <li className="text-white">
+              <CharacterCard data={value} />
+            </li>
+          </Link>
+        ))}
+      </ul>
+    </section>
+
+    {/* Episodes */}
+    <section className="px-6 md:px-20 lg:px-28 mt-16">
+      <div className="flex items-center justify-between pb-4">
+        <h3 className="font-bold text-2xl font-inter text-white">Episódios</h3>
+        <Moreinfo />
+      </div>
+      <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        {episode.slice(0, 5).map((value) => (
+          <Link to={`/Episode/${value.id}`} key={value.id}>
+            <li className="text-white">
+              <EpisodeCard data={value} />
+            </li>
+          </Link>
+        ))}
+      </ul>
+    </section>
+
+    {/* Locations */}
+    <section className="px-6 md:px-20 lg:px-28 mt-16">
+      <div className="flex items-center justify-between pb-4">
+        <h3 className="font-bold text-2xl font-inter text-white">Localizações</h3>
+        <Moreinfo />
+      </div>
+      <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+        {location.slice(0, 7).map((value) => (
+          <Link to={`/Location/${value.id}`} key={value.id}>
+            <li className="text-white">
+              <LocationCard data={value} />
+            </li>
+          </Link>
+        ))}
+      </ul>
+    </section>
+
+    <Footer />
+  </div>
     </>
   );
 }
